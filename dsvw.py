@@ -53,6 +53,9 @@ class ReqHandler(http.server.BaseHTTPRequestHandler):
                         cursor.execute("SELECT id, comment, time FROM comments")
                         content += "<div><span>Comment(s):</span></div><table><thead><th>id</th><th>comment</th><th>time</th></thead>%s</table>%s" % ("".join("<tr>%s</tr>" % "".join("<td>%s</td>" % ("-" if _ is None else _) for _ in row) for row in cursor.fetchall()), HTML_POSTFIX)
                 elif "include" in params:
+                    # Shift down by some lines with comments
+                    # ....
+                    # ....
                     backup, sys.stdout, program, envs = sys.stdout, io.StringIO(), (open(params["include"], "rb") if not "://" in params["include"] else urllib.request.urlopen(params["include"])).read(), {"DOCUMENT_ROOT": os.getcwd(), "HTTP_USER_AGENT": self.headers.get("User-Agent"), "REMOTE_ADDR": self.client_address[0], "REMOTE_PORT": self.client_address[1], "PATH": path, "QUERY_STRING": query}
                     exec(program, envs)
                     content += sys.stdout.getvalue()
