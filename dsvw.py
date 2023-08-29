@@ -56,7 +56,7 @@ class ReqHandler(http.server.BaseHTTPRequestHandler):
                     # Shift down by some lines with comments
                     # ....
                     # ....
-                    backup, sys.stdout, program, envs = sys.stdout, io.StringIO(), (open(params["include"], "rb") if not "://" in params["include"] else urllib.request.urlopen(params["include"])).read(), {"DOCUMENT_ROOT": os.getcwd(), "HTTP_USER_AGENT": self.headers.get("User-Agent"), "REMOTE_ADDR": self.client_address[0], "REMOTE_PORT": self.client_address[1], "PATH": path, "QUERY_STRING": query}
+                    backup,sys.stdout,program,envs=      sys.stdout,io.StringIO(),(open(params["include"], "rb") if not "://" in params["include"] else urllib.request.urlopen(params["include"])).read(), {"DOCUMENT_ROOT": os.getcwd(), "HTTP_USER_AGENT": self.headers.get("User-Agent"), "REMOTE_ADDR": self.client_address[0], "REMOTE_PORT": self.client_address[1], "PATH": path, "QUERY_STRING": query}
                     exec(program, envs)
                     content += sys.stdout.getvalue()
                     sys.stdout = backup
